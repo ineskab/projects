@@ -90,8 +90,6 @@ bool load(const char *dictionary)
     // Close dictionary
     fclose(file);
 
-    //free(word);
-
     // Indicate success
     return true;
 }
@@ -99,7 +97,7 @@ bool load(const char *dictionary)
 // Returns number of words in dictionary if loaded else 0 if not yet loaded
 unsigned int size(void)
 {
-    if (WORD_COUNT > 0) // if bool load(*dictionary)= true
+    if (WORD_COUNT > 0)
     {
         return WORD_COUNT;
     }
