@@ -7,5 +7,6 @@ while True:
         break
 
 for i in range(n):
-    print("#"*(i + 1))
-print()
+    print(" "*(n-i-1),end="")
+    print("#"*(i+1),end="")
+    print()
