@@ -20,7 +20,7 @@ def main():
 
     for word in x:
         if word in BannedWords:
-            outputString += "*" * len(word) + ""
+            outputString += "*" * len(word) + " "
         else:
             outputString += word + " "
     print(outputString.strip())
