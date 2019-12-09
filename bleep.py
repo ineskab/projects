@@ -19,7 +19,7 @@ def main():
     outputString = ""
 
     for word in x:
-        if word in BannedWords:
+        if word.lower() in BannedWords:
             outputString += "*" * len(word) + " "
         else:
             outputString += word + " "
