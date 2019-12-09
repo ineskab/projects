@@ -2,28 +2,34 @@ from cs50 import get_string
 from sys import argv
 import sys
 
+
 def main():
      # Accepts as its sole command-line argument the name (or path) of a dictionary of banned words (i.e., text file).
     if len(sys.argv) != 2:
         print("Usage: python bleep.py dictionary")
         exit(1)
 
-    file = open(argv[1])
-    BannedWords = set()
+    banned_words = set()
 
-    for line in file:
-        BannedWords.add(line.strip("\n").lower())
+    with open(argv[1], "r") as file:
+        for line in file:
+            banned_words.add(line.strip("\n").lower())
 
+    # Prompts the user to provide a mesage
     message = get_string("What message would you like to censor? ")
-    x = message.split()
-    outputString = ""
-
-    for word in x:
-        if word.lower() in BannedWords:
-            outputString += "*" * len(word) + " "
+    # Tokenizes that message into its individual component words
+    words = message.split()
+    output = ""
+    # Iterates over the list of "tokens" (words) that is returned by calling split
+    for word in words:
+        if word.lower() in banned_words:
+            output += len(word) * "*" + " "
         else:
-            outputString += word + " "
-    print(outputString.strip())
+            output += word + " "
+    # Print back the censored message, i.e. banned words characters present in the message will be replaced with "*")
+    print(output.strip())
+    return 0
+
 
 if __name__ == "__main__":
     main()
