@@ -56,13 +56,16 @@ def index():
     total = 0
     for stock in stocks:
         stock["price"] = lookup(stock["symbol"])["price"]
+        stock["total"] = stock["price"] * stock["shares"]
         stock["name"] = lookup(stock["symbol"])["name"]
-        total += stock["price"] * stock["shares"]
+        total += stock["total"]
+        stock["price"] = '{:.2f}'.format(stock["price"])
+        stock["total"] = '{:.2f}'.format(stock["total"])
     total += cash
     return render_template("index.html",
         stocks=stocks,
-        cash=cash,
-        total=total)
+        cash='{:.2f}'.format(cash),
+        total='{:.2f}'.format(total))
 
 
 def is_string_int(s):
