@@ -81,11 +81,11 @@ def buy():
         symbol = request.form.get("symbol").upper()
         quote = lookup(symbol)
         if not quote:
-            return apology("invalid symbol", 403)
+            return apology("invalid symbol", 400)
 
         shares = int(request.form.get("shares"))
         if shares <= 0:
-            return apology("number of shares has to be a positive number", 403)
+            return apology("number of shares has to be a positive number", 400)
 
         # Check if the user can afford
         cash = db.execute("SELECT cash FROM users WHERE id =:id", id = session["user_id"])
@@ -221,9 +221,9 @@ def register():
 
         # Ensure username was submitted
         if not username:
-            return apology("must provide username", 403)
+            return apology("must provide username", 400)
         elif not is_available:
-            return apology("provided username already exists", 403)
+            return apology("provided username already exists", 400)
         # Ensure password was submitted
         elif not request.form.get("password"):
             return apology("must provide password", 403)
@@ -232,7 +232,7 @@ def register():
             return apology("must confirm password", 403)
         # Ensure passwords match
         elif request.form.get("confirmation") != request.form.get("password"):
-            return apology("Password doesn't match!", 403)
+            return apology("Password doesn't match!", 400)
 
         # Add user to databse
         result = db.execute("INSERT INTO users (username, hash) VALUES (:username, :hash)",
