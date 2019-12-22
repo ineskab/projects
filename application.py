@@ -136,9 +136,9 @@ def check(username):
     rows = db.execute("SELECT * FROM users WHERE username = :username",
         username=username)
     if rows[0]:
-        return True
+        return jsonify(False)
     else:
-        return False
+        return jsonify(True)
 
 
     # if does_exist:
@@ -247,8 +247,8 @@ def register():
         if not request.form.get("password"):
             return apology("must provide password", 400)
 
-        # is_available = json.loads(check(username).response[0])
-        is_available = check(username)
+        is_available = json.loads(check(username).response[0])
+        #is_available = check(username)
         if not is_available:
             return apology("provided username already exists", 400)
 
