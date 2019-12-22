@@ -236,14 +236,16 @@ def register():
         username = request.form.get("username")
         if not username:
             return apology("must provide username", 400)
-        is_available = json.loads(check(username).response[0])
+        # Ensure password was submitted
+        if not request.form.get("password"):
+            return apology("must provide password", 400)
 
+        is_available = json.loads(check(username).response[0])
 
         if not is_available:
             return apology("provided username already exists", 400)
-        # Ensure password was submitted
-        elif not request.form.get("password"):
-            return apology("must provide password", 400)
+
+
         # Ensure password was submitted
         elif not request.form.get("confirmation"):
             return apology("must confirm password", 400)
