@@ -64,6 +64,14 @@ def index():
     #return apology("homepage")
 
 
+def is_string_int(s):
+    try:
+        int(s)
+        return True
+    except ValueError:
+        return False
+
+
 @app.route("/buy", methods=["GET", "POST"])
 @login_required
 def buy():
@@ -84,7 +92,11 @@ def buy():
             return apology("invalid symbol", 400)
 
         shares = request.form.get("shares"))
-        if shares <= 0 or not isinstance(shares, int):
+        if not is_string_int(shares):
+            return apology("number of shares has to be a positive number", 400)
+        else:
+            shares = int(shares)
+        if shares <= 0:
             return apology("number of shares has to be a positive number", 400)
 
         # Check if the user can afford
@@ -281,7 +293,11 @@ def sell():
         price = quote["price"]
 
         shares = request.form.get("shares")
-        if shares <= 0 or not isinstance(shares, int):
+        if not is_string_int(shares):
+            return apology("number of shares has to be a positive number", 400)
+        else:
+            shares = int(shares)
+        if shares <= 0:
             return apology("number of shares has to be a positive number", 403)
 
         # implemented as a select menu whose name is symbol.
