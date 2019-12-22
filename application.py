@@ -137,7 +137,7 @@ def check(username):
     username = request.args.get('username', type = str)
     rows = db.execute("SELECT * FROM users WHERE username = :username",
         username=username)
-    if rows[0]:
+    if rows:
         return jsonify(False)
     else:
         return jsonify(True)
