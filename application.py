@@ -59,9 +59,10 @@ def index():
         stock["name"] = lookup(stock["symbol"])["name"]
         total += stock["price"] * stock["shares"]
     total += cash
-    return render_template("index.html", stocks=stocks, cash=cash, total=total)
-
-    #return apology("homepage")
+    return render_template("index.html",
+        stocks=stocks,
+        cash=cash,
+        total=total)
 
 
 def is_string_int(s):
@@ -129,10 +130,11 @@ def buy():
         return render_template("buy.html")
 
 
-@app.route("/check", methods=["GET"])
-@login_required
+#@app.route("/check", methods=["GET"])
+@app.route('/<username>', methods=["GET"])
 def check(username):
     """Return true if username available, else false, in JSON format"""
+    username = request.args.get('username', type = str)
     rows = db.execute("SELECT * FROM users WHERE username = :username",
         username=username)
     if rows[0]:
@@ -246,6 +248,7 @@ def register():
         # Ensure password was submitted
         if not request.form.get("password"):
             return apology("must provide password", 400)
+
 
         is_available = json.loads(check(username).response[0])
         #is_available = check(username)
