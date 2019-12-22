@@ -117,10 +117,10 @@ def buy():
         return render_template("buy.html")
 
 
-@app.route("/check", methods=["GET"])
-def check(username_):
+
+def check(username):
     """Return true if username available, else false, in JSON format"""
-    does_exist = db.execute("SELECT * FROM users WHERE username = :username", username=username_)
+    does_exist = db.execute("SELECT * FROM users WHERE username = :username", username=username)
     if does_exist:
         return jsonify(False)
     else:
