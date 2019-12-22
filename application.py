@@ -130,7 +130,6 @@ def buy():
         return render_template("buy.html")
 
 
-#@app.route("/check", methods=["GET"])
 @app.route('/<username>', methods=["GET"])
 def check(username):
     """Return true if username available, else false, in JSON format"""
@@ -141,12 +140,6 @@ def check(username):
         return jsonify(False)
     else:
         return jsonify(True)
-
-
-    # if does_exist:
-    #     return jsonify(False)
-    # else:
-    #     return jsonify(True)
 
 
 @app.route("/history")
@@ -226,7 +219,7 @@ def quote():
         return render_template("quoted.html",
             symbol=symbol,
             name=quote["name"],
-            price=quote["price"] )
+            price='{:.2f}'.format(quote["price"]))
 
     else:
         return render_template("quote.html")
