@@ -287,17 +287,17 @@ def sell():
     # render an apology if the user fails to select a stock
 
         if not request.form.get("symbol"):
-            return apology("must provide symbol", 403)
+            return apology("must provide symbol", 400)
 
         # Ensure share was submitted
         if not request.form.get("shares"):
-            return apology("must provide shares", 403)
+            return apology("must provide shares", 400)
 
         symbol = request.form.get("symbol").upper()
         quote = lookup(symbol)
 
         if not quote:
-            return apology("invalid symbol", 403)
+            return apology("invalid symbol", 400)
         price = quote["price"]
 
         shares = request.form.get("shares")
@@ -341,9 +341,12 @@ def sell():
         transacted = datetime.now()
         db.execute("INSERT INTO history (id, symbol, shares, price, transacted) VALUES (:id, :symbol, :shares, :price, :transacted)",
             id=session["user_id"], symbol = symbol, shares = -(shares), price=price, transacted=transacted )
+
         return redirect("/")
     else:
-        return render_template("sell.html")
+        stocks = db.execute("SELECT symbol FROM portfolio WHERE id=:id",
+            id = session["user_id"])
+        return render_template("sell.html", stocks=stocks)
 
 def errorhandler(e):
     """Handle error"""
