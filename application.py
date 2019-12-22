@@ -83,7 +83,7 @@ def buy():
         if not quote:
             return apology("invalid symbol", 400)
 
-        shares = int(request.form.get("shares"))
+        shares = round(float(request.form.get("shares")))
         if shares <= 0:
             return apology("number of shares has to be a positive number", 400)
 
