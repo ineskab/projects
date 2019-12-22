@@ -306,20 +306,20 @@ def sell():
         else:
             shares = int(shares)
         if shares <= 0:
-            return apology("number of shares has to be a positive number", 403)
+            return apology("number of shares has to be a positive number", 400)
 
         # implemented as a select menu whose name is symbol.
         shares_owned = db.execute("SELECT shares FROM portfolio WHERE id =:id and symbol= :symbol",
             id = session["user_id"], symbol=symbol)
         # render an apology  if the user does not own any shares of that stock.
         if len(shares_owned) == 0:
-            return apology("You don't owned this stock", 403)
+            return apology("You don't owned this stock", 400)
 
         shares_owned = shares_owned[0]["shares"]
         shares_update= shares_owned  - shares
 
         if shares > shares_owned:
-            return apology("To much", 403)
+            return apology("To much", 400)
 
 
         cash_update = shares * price
@@ -334,7 +334,6 @@ def sell():
             db.execute("DELETE from portfolio WHERE id =:id AND symbol=:symbol", id = session["user_id"], symbol=symbol)
 
         elif shares_update > 0:
-
             db.execute("UPDATE portfolio SET shares = shares + :shares_update WHERE id =:id", shares_update=shares_update, id = session["user_id"])
 
         # Update history table
