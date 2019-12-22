@@ -133,11 +133,17 @@ def buy():
 @login_required
 def check(username):
     """Return true if username available, else false, in JSON format"""
-    does_exist = db.execute("SELECT * FROM users WHERE username = :username", username=username)
-    if does_exist:
-        return jsonify(False)
+    if db.execute("SELECT * FROM users WHERE username = :username",
+        username=username):
+        return True
     else:
-        return jsonify(True)
+        return False
+
+
+    # if does_exist:
+    #     return jsonify(False)
+    # else:
+    #     return jsonify(True)
 
 
 @app.route("/history")
@@ -240,8 +246,8 @@ def register():
         if not request.form.get("password"):
             return apology("must provide password", 400)
 
-        is_available = json.loads(check(username).response[0])
-
+        # is_available = json.loads(check(username).response[0])
+        is_available = check(username)
         if not is_available:
             return apology("provided username already exists", 400)
 
