@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+    <!-- http://getbootstrap.com/docs/4.1/components/alerts/ -->
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">email</th>
+                <th scope="col">example</th>
+                <th scope="col">City</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+            <tr>
+                <td>{{ student["email"] }}</td>
+                <td>{{ student["example"] }}</td>
+                <td>{{ student["City"] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

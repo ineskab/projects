@@ -1,0 +1,27 @@
+/* TODO */
+html, body
+{
+    height: 100%;
+    font-family: sans-serif;
+    line-height: 1.15;
+}
+.form-control
+{
+    display: inline-block;
+    width: auto;
+}
+
+
+button
+{
+  border-radius: 0;
+}
+caption {
+    padding: 10px;
+    caption-side: bottom;
+}
+
+table {
+    border-collapse: collapse;
+    border: 2px solid rgb(200, 200, 200);
+}
