@@ -228,10 +228,10 @@ def register():
         elif not request.form.get("password"):
             return apology("must provide password", 403)
         # Ensure password was submitted
-        elif not request.form.get("confirm action"):
+        elif not request.form.get("confirmation"):
             return apology("must confirm password", 403)
         # Ensure passwords match
-        elif request.form.get("password_confirmation") != request.form.get("password"):
+        elif request.form.get("confirmation") != request.form.get("password"):
             return apology("Password doesn't match!", 403)
 
         # Add user to databse
