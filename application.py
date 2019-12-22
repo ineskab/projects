@@ -117,7 +117,7 @@ def buy():
         return render_template("buy.html")
 
 
-
+@app.route("/check", methods=["GET"])
 def check(username):
     """Return true if username available, else false, in JSON format"""
     does_exist = db.execute("SELECT * FROM users WHERE username = :username", username=username)
@@ -219,13 +219,14 @@ def register():
     session.clear()
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
-        username = request.form.get("username")
-        is_available = json.loads(check(username).response[0])
-
         # Ensure username was submitted
+        username = request.form.get("username")
         if not username:
             return apology("must provide username", 400)
-        elif not is_available:
+        is_available = json.loads(check(username).response[0])
+
+
+        if not is_available:
             return apology("provided username already exists", 400)
         # Ensure password was submitted
         elif not request.form.get("password"):
