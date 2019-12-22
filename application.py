@@ -91,7 +91,7 @@ def buy():
         if not quote:
             return apology("invalid symbol", 400)
 
-        shares = request.form.get("shares"))
+        shares = request.form.get("shares")
         if not is_string_int(shares):
             return apology("number of shares has to be a positive number", 400)
         else:
