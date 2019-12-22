@@ -83,8 +83,8 @@ def buy():
         if not quote:
             return apology("invalid symbol", 400)
 
-        shares = round(float(request.form.get("shares")))
-        if shares <= 0:
+        shares = request.form.get("shares"))
+        if shares <= 0 or not isinstance(shares, int):
             return apology("number of shares has to be a positive number", 400)
 
         # Check if the user can afford
@@ -118,6 +118,7 @@ def buy():
 
 
 @app.route("/check", methods=["GET"])
+@login_required
 def check(username):
     """Return true if username available, else false, in JSON format"""
     does_exist = db.execute("SELECT * FROM users WHERE username = :username", username=username)
@@ -279,8 +280,8 @@ def sell():
             return apology("invalid symbol", 403)
         price = quote["price"]
 
-        shares = int(request.form.get("shares"))
-        if shares <= 0:
+        shares = request.form.get("shares")
+        if shares <= 0 or not isinstance(shares, int):
             return apology("number of shares has to be a positive number", 403)
 
         # implemented as a select menu whose name is symbol.
