@@ -324,11 +324,10 @@ def sell():
 
         cash_update = shares * price
 
-        # Update the cash user table-- nie wiem, czy dobrze
+        # Update the cash user table- dobrze
         db.execute("UPDATE users SET cash = cash + :cash_update WHERE id =:id", cash_update=cash_update, id = session["user_id"])
 
         # Update portfolio table
-        # if shares_update = 0
         if shares_update == 0:
 
             db.execute("DELETE from portfolio WHERE id =:id AND symbol=:symbol", id = session["user_id"], symbol=symbol)
