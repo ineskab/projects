@@ -133,8 +133,9 @@ def buy():
 @login_required
 def check(username):
     """Return true if username available, else false, in JSON format"""
-    if db.execute("SELECT * FROM users WHERE username = :username",
-        username=username):
+    rows = db.execute("SELECT * FROM users WHERE username = :username",
+        username=username)
+    if rows[0]:
         return True
     else:
         return False
