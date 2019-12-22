@@ -4,7 +4,7 @@ from nltk.tokenize import sent_tokenize
 def lines(a, b):
     """Return lines in both a and b"""
 
-    return list(set(a.splitlines())&(set(b.splitlines())))
+    return list(set(a.splitlines()) & (set(b.splitlines())))
 
 
 def sentences(a, b):
