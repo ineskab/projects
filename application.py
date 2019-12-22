@@ -118,9 +118,9 @@ def buy():
 
 
 @app.route("/check", methods=["GET"])
-def check(username):
+def check(username_):
     """Return true if username available, else false, in JSON format"""
-    does_exist = db.execute("SELECT * FROM users WHERE username = :username", username=username)
+    does_exist = db.execute("SELECT * FROM users WHERE username = :username", username=username_)
     if does_exist:
         return jsonify(False)
     else:
@@ -198,10 +198,13 @@ def quote():
         symbol = request.form.get("symbol").upper()
         quote = lookup(symbol)
          # Validate symbol
-        if quote == None:
+        if quote is None:
             return apology("Wrong symbol")
 
-        return render_template("quoted.html", symbol=symbol, name=quote["name"], price=quote["price"] )
+        return render_template("quoted.html",
+            symbol=symbol,
+            name=quote["name"],
+            price=quote["price"] )
 
     else:
         return render_template("quote.html")
