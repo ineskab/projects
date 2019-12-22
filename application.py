@@ -226,10 +226,10 @@ def register():
             return apology("provided username already exists", 400)
         # Ensure password was submitted
         elif not request.form.get("password"):
-            return apology("must provide password", 403)
+            return apology("must provide password", 400)
         # Ensure password was submitted
         elif not request.form.get("confirmation"):
-            return apology("must confirm password", 403)
+            return apology("must confirm password", 400)
         # Ensure passwords match
         elif request.form.get("confirmation") != request.form.get("password"):
             return apology("Password doesn't match!", 400)
