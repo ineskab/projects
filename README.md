@@ -1,0 +1,4 @@
+It is a website where users can share their experience, ask questions on a wide range of topics.
+If you have to face some challenges, you can read about other people's experiences in similar situations - use the search button to find the topic you are interested in. If it isn't there yet, create a post describing your situation so that others can reply and hopefully help.
+Likewise, if you had in your life a challenge, you can also create a post and share that experience. Create tags so that your topic can be easier accessible.
+To add a post or respond to someone else's post, you have to be registered.

@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    topic
+{% endblock %}
+
+{% block main %}
+    <h4>{{ post.subject }}</h4>
+    <table class="table table-striped">
+        <tr>
+            <td class= "content">{{ post.post }}</td>
+            <td>{{ post.user }}</td>
+            <td>{{ post.post_date }}</td>
+        </tr>
+    </table>
+    <br>
+
+    <table class="table table-hover">
+        {% for reply in replies %}
+            <tr>
+                <td class= "content">{{ reply.reply_content }}</td>
+                <td>{{ reply.username }}</td>
+                <td>{{ reply.date }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    {% if session.user_id %}
+        <form action="/post_reply" method="post">
+            <h2 class="space">
+                ADD REPLY
+            </h2>
+                <input name="original_post_id" value= "{{ original_post_id }}" type="hidden">
+            <div class="form-group">
+                <textarea class="form-control"  name="reply_content"  rows="15" > </textarea>
+            </div>
+            <div class="form-submit cbt grid gsx gs4">
+                <button id="submit-button" class="btn btn-secondary" type="submit" tabindex="120" autocomplete="off">Reply</button>
+            </div>
+        </form>
+    {% else %}
+        <h2 class="space1">
+            Need to login or register in order to replay
+        </h2>
+    {% endif %}
+{% endblock %}

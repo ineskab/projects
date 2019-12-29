@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    post_template
+{% endblock %}
+
+{% block main %}
+    {% if session.user_id %}
+        <form action="/post_template" method="post">
+            <h2 class="space">
+                ADD YOUR WISDOM TO THE WORLD
+            </h2>
+            <div class="form-group">
+                <input type="text" class="form-control" autocomplete="off" autofocus="" id="exampleFormControlInput1" name="subject" placeholder="Title">
+            </div>
+            <div class="form-group">
+                <textarea class="form-control"  name="post_content"  rows="15" > </textarea>
+            </div>
+
+            <div class="form-group">
+                <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Tags <small>Add up to 10 tags to describe what your question is about</small></label>
+                <input type="text" name="tags" class="form-control" autocomplete="off" tabindex="0" placeholder="add tags e.g. education, health, nutrition">
+            </div>
+            <div class="form-submit cbt grid gsx gs4">
+                <button id="submit-button" class="btn btn-secondary"  type="submit" tabindex="120" autocomplete="off">Post </button>
+            </div>
+        </form>
+    {% else %}
+        <h2 class="space1">
+            Need to login or register in order to create a post
+        </h2>
+    {% endif %}
+{% endblock %}
