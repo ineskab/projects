@@ -1,0 +1,44 @@
+nav .navbar-brand
+{
+    /* size for brand */
+    font-size: 1.5em;
+    color: #222;
+
+}
+nav .navbar-brand .blue
+{
+color: #3FB0AC;
+}
+
+navbar{
+background-color: #dddfd4;
+}
+
+a: {color: #0c9699}
+
+blockquote { margin: 50px; width: 90%; background-color: #fff; position: relative; bottom: 0; }
+.quote{ font-style: italic; font-size: 2em; color: #444;}
+
+.credit{color: #777; font-size: 1.5em;}
+
+
+blockquote::before {
+    content:'\201c';
+    color:#d2bd65;
+    position: absolute;
+    left:-3%;
+    top: -50px;
+    font-size: 5em;
+    font-family: serif;
+}
+p.quote::after {
+    content:'\201D';
+    color:#d2bd65;
+    position: absolute;
+    font-size: 3em;
+    font-family: serif;
+}
+
+.content{width: 650px}
+.greenish{color: #c19434}
+.space1 {color: #c60021}

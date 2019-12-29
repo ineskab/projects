@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Subjects
+{% endblock %}
+
+{% block main %}
+
+{% for post in posts %}
+<tr>
+    <td class="text-center"><i class="fa fa-question fa-2x text-primary"></i></td>
+    <td>
+      <h4><a href="{{ url_for('show_subject', id=post.id) }}">{{ post.subject }}</a><br><small>{{ post.post_date }}</small></h4>
+
+    </td>
+</tr>
+{% endfor %}
+
+{% endblock %}
+
